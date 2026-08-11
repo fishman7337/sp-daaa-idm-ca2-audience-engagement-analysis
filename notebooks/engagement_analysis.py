@@ -37,7 +37,10 @@ from sp_digital_marketing.data import (  # noqa: E402
     prepare_group_posts,
     validate_dataframes,
 )
-from sp_digital_marketing.plots import save_comparison_figures  # noqa: E402
+from sp_digital_marketing.plots import (  # noqa: E402
+    save_comparison_figures,
+    seed_plot_randomness,
+)
 
 
 # %% [markdown]
@@ -61,6 +64,7 @@ GREEN = "#2F855A"
 RED = "#C53030"
 PURPLE = "#6B46C1"
 PALETTE = [BLUE, ORANGE, GREEN, RED, PURPLE]
+seed_plot_randomness()
 
 
 def save_figure(figure: plt.Figure, filename: str) -> Path:
@@ -151,6 +155,7 @@ figure, axes = plt.subplots(2, 2, figsize=(12, 8))
 axes = axes.flatten()
 
 for axis, metric, color in zip(axes, performance_metrics, PALETTE[:4], strict=True):
+    display_metric = "Engagement Rate" if metric == "EngagementRate" else metric
     sns.barplot(
         data=group_posts,
         x="Type",
@@ -171,8 +176,9 @@ for axis, metric, color in zip(axes, performance_metrics, PALETTE[:4], strict=Tr
         ax=axis,
     )
     label_bars(axis)
-    axis.set_title(f"Average {metric}")
+    axis.set_title(f"Average {display_metric}")
     axis.set_xlabel("")
+    axis.set_ylabel(display_metric)
     axis.grid(axis="x", visible=False)
 
 figure.suptitle("Selected Group Posts: Performance by Post Type", fontsize=16, weight="bold")
@@ -355,9 +361,11 @@ for output_path in save_comparison_figures(data):
 
 # %%
 top_by_views = posts.sort_values("Views", ascending=False).head(5)
-top_by_engagement = posts.assign(Engagement=posts["Comments"] + posts["Reactions"]).sort_values(
-    "Engagement", ascending=False
-).head(5)
+top_by_engagement = (
+    posts.assign(Engagement=posts["Comments"] + posts["Reactions"])
+    .sort_values("Engagement", ascending=False)
+    .head(5)
+)
 
 print("Top 5 posts by views")
 print(top_by_views[["Member", "Comments", "Reactions", "Views"]].to_string(index=False))

@@ -12,7 +12,9 @@ The analysis combines exploratory notebook work with reusable Python helpers. Th
 4. Add manually curated metadata for post date and post type where the raw export does not provide those fields.
 5. Calculate engagement and engagement rate.
 6. Compare selected group posts against the wider observed population.
-7. Export final boxplot figures to `reports/figures/`.
+7. Reset plotting jitter to random seed 42 and export the final figures to
+   `reports/figures/` so repeated runs in the same dependency environment are
+   byte-for-byte reproducible.
 
 ## Assumptions
 
