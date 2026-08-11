@@ -18,7 +18,6 @@ COMPARISON_PALETTE = {
 
 def save_comparison_figures(data: ProjectData, output_dir: Path = FIGURES_DIR) -> list[Path]:
     """Save boxplot comparison figures and return the created paths."""
-
     output_dir.mkdir(parents=True, exist_ok=True)
     comparison = build_population_comparison(data.posts)
 
@@ -58,7 +57,9 @@ def save_comparison_figures(data: ProjectData, output_dir: Path = FIGURES_DIR) -
             ax=axis,
             legend=False,
         )
-        axis.set_title(f"{metric}: Our Posts vs Wider Population", loc="left", weight="bold", pad=14)
+        axis.set_title(
+            f"{metric}: Our Posts vs Wider Population", loc="left", weight="bold", pad=14
+        )
         axis.set_xlabel("")
         axis.set_ylabel(ylabel)
         axis.grid(axis="x", visible=False)

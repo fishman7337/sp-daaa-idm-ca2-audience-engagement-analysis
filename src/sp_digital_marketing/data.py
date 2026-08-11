@@ -93,7 +93,6 @@ class ProjectData:
 
 def load_all_data() -> ProjectData:
     """Load all raw CSV datasets using the canonical project paths."""
-
     return ProjectData(
         posts=pd.read_csv(POSTS_FILE),
         days_summary=pd.read_csv(DAYS_SUMMARY_FILE),
@@ -104,7 +103,6 @@ def load_all_data() -> ProjectData:
 
 def validate_dataframes(data: ProjectData) -> None:
     """Validate required columns, values, and date/day consistency."""
-
     frames = {
         "posts": data.posts,
         "days_summary": data.days_summary,
@@ -150,7 +148,6 @@ def validate_dataframes(data: ProjectData) -> None:
 
 def prepare_group_posts(posts: pd.DataFrame, member: str = GROUP_MEMBER) -> pd.DataFrame:
     """Prepare selected group posts with curated metadata and engagement metrics."""
-
     selected_posts = posts.loc[posts["Member"] == member].copy()
     merged = selected_posts.join(GROUP_POST_METADATA, how="inner")
 
@@ -167,7 +164,6 @@ def prepare_group_posts(posts: pd.DataFrame, member: str = GROUP_MEMBER) -> pd.D
 
 def build_population_comparison(posts: pd.DataFrame, member: str = GROUP_MEMBER) -> pd.DataFrame:
     """Label selected group posts and comparison-population posts in one dataframe."""
-
     group_posts = posts.loc[posts["Member"] == member].copy()
     population_posts = posts.loc[posts["Member"] != member].copy()
     group_posts["Dataset"] = "Our Post"

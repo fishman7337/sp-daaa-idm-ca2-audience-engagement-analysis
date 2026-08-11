@@ -17,7 +17,9 @@ def test_prepare_group_posts_adds_expected_metrics() -> None:
     assert (group_posts["Engagement"] == group_posts["Comments"] + group_posts["Reactions"]).all()
     assert (group_posts["Duration of Post"] >= 0).all()
 
-    expected_rate = ((group_posts["Comments"] + group_posts["Reactions"]) / group_posts["Views"] * 100)
+    expected_rate = (
+        (group_posts["Comments"] + group_posts["Reactions"]) / group_posts["Views"] * 100
+    )
     pd.testing.assert_series_equal(
         group_posts["EngagementRate"],
         expected_rate.round(2),
