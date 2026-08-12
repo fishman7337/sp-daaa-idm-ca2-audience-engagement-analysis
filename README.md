@@ -4,6 +4,15 @@
 
 Python and Jupyter analysis project for a Singapore Polytechnic Introduction to Digital Marketing CA2 assignment. The repository studies audience engagement patterns from post-level data, including comments, reactions, views, day-of-week activity, time-of-day activity, and selected-post performance against the wider observed population.
 
+## Evidence and interpretation
+
+| Evidence-backed measure | Current repository evidence |
+| --- | --- |
+| Parsed corpus | **100 posts, 192 comments, 689 reactions, and 8,208 views**. |
+| Campaign subset | **7 selected content pieces** are analysed as the focused campaign group. |
+
+The qualitative outcome is an evidence-led content-performance workflow spanning data quality, engagement comparisons, correlations, visualisation, and recommendations. Corpus totals describe the source data, not a post-recommendation uplift in engagement.
+
 ## Academic Context
 
 This project was completed under Singapore Polytechnic, School of Business, Poly-Wide Elective, **Introduction to Digital Marketing (EP0702), CA2**, in **AY24/25 Year 1 Semester 2**.

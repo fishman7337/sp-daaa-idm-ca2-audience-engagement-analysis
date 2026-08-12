@@ -6,7 +6,6 @@ from sp_digital_marketing.plots import save_comparison_figures
 
 def main() -> None:
     """Load, validate, and regenerate the comparison figures."""
-
     data = load_all_data()
     validate_dataframes(data)
     output_paths = save_comparison_figures(data)

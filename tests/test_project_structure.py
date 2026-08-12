@@ -31,6 +31,7 @@ def test_each_project_folder_has_readme() -> None:
         "venv",
         "build",
         "dist",
+        "graphify-out",
     }
     folders = [
         path

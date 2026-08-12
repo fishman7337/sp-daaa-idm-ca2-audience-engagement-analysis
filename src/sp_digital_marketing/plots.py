@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
 
 from sp_digital_marketing.config import FIGURES_DIR
@@ -14,11 +15,17 @@ COMPARISON_PALETTE = {
     "Our Post": "#2B6CB0",
     "Population": "#DD6B20",
 }
+PLOT_RANDOM_SEED = 42
+
+
+def seed_plot_randomness() -> None:
+    """Reset plotting jitter to the project's reproducible random seed."""
+    np.random.seed(PLOT_RANDOM_SEED)
 
 
 def save_comparison_figures(data: ProjectData, output_dir: Path = FIGURES_DIR) -> list[Path]:
     """Save boxplot comparison figures and return the created paths."""
-
+    seed_plot_randomness()
     output_dir.mkdir(parents=True, exist_ok=True)
     comparison = build_population_comparison(data.posts)
 
@@ -58,7 +65,9 @@ def save_comparison_figures(data: ProjectData, output_dir: Path = FIGURES_DIR) -
             ax=axis,
             legend=False,
         )
-        axis.set_title(f"{metric}: Our Posts vs Wider Population", loc="left", weight="bold", pad=14)
+        axis.set_title(
+            f"{metric}: Our Posts vs Wider Population", loc="left", weight="bold", pad=14
+        )
         axis.set_xlabel("")
         axis.set_ylabel(ylabel)
         axis.grid(axis="x", visible=False)
